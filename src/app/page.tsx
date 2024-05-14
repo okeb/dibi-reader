@@ -1,5 +1,3 @@
-import { Card } from "@mantine/core";
-import Image from "next/image";
 import { TextGenerateEffect } from "../../components/base/verset";
 
 export default function Home() {

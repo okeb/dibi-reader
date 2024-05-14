@@ -6,6 +6,7 @@ import { Notifications } from '@mantine/notifications';
 import '@mantine/core/styles.css';
 import '@mantine/notifications/styles.css';
 import { ModalsProvider } from "@mantine/modals";
+import Head from "next/head";
 
 const inter = Font({ weight: ['400', '700'], subsets: ['latin-ext'], style: ['normal', 'italic'] });
 
@@ -25,6 +26,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Head>
+        <link rel="apple-touch-icon" sizes="180x180" href="/public/assets/favicon/apple-touch-icon.png"/>
+        <link rel="icon" type="image/png" sizes="32x32" href="/public/assets/favicon/favicon-32x32.png"/>
+        <link rel="icon" type="image/png" sizes="16x16" href="/public/assets/favicon/favicon-16x16.png"/>
+        <link rel="manifest" href="/public/assets/favicon/site.webmanifest"/>
+        <link rel="mask-icon" href="/public/assets/favicon/safari-pinned-tab.svg" color="#000202"/>
+        <meta name="msapplication-TileColor" content="#000000"/>
+        <meta name="theme-color" content="#ffffff"></meta>
+      </Head>
       <MantineProvider theme={{...theme}} defaultColorScheme="dark">
         <ModalsProvider>
           <Notifications />
