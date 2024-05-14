@@ -1,0 +1,47 @@
+.footer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  &:hover {
+    .toggle{
+      transform: rotateZ(180deg);
+      transition: transform .5s;
+      transition-delay: .3s;
+    }
+    .menu {
+      transition: height .5s;
+      height: 60px;
+    }
+  }
+
+  .toggle{
+    padding: 25px;
+    width: 4.3em;
+    height: 4.3em;
+    transform: rotateZ(0deg);
+    transition: transform .5s;
+    transition-delay: .3s;
+  }
+
+  .menu {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    justify-content: end;
+    height: 0px;
+    padding: 0 20px;
+    transition: all .3s;
+    overflow: hidden;
+  }
+
+  .menuItem {
+    width: 2rem;
+    opacity: .3;
+    padding: 5px;
+    transition: opacity .5s;
+    &:hover {
+      transition: opacity .3s;
+      opacity: 1;
+    }
+  }
+}

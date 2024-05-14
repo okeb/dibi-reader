@@ -1,0 +1,51 @@
+.sectionBody {
+  height: calc(100vh);
+  display: flex;
+  flex-direction: column;
+  width: 45rem;
+  padding-bottom: 3rem;
+  margin: auto;
+  justify-content: center;
+} 
+
+.verset {
+  color: 'white';
+  font-size: 1.6rem;
+  font-style: italic;
+  padding-top: 2px;
+  &:hover {
+    color: white;
+  }
+}
+
+
+.link {
+  color:white;
+  opacity: .3;
+  transition: all;
+  transition-duration: .3s;
+  padding: 4px;
+  svg {
+    width: 1.4rem;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.linkAction {
+  color:white;
+  opacity: .3;
+  transition: all;
+  transition-duration: .3s;
+  padding: 3px;
+  svg {
+    width: 1.4rem;
+  }
+
+
+  &:hover {
+    opacity: 1;
+  }
+}
