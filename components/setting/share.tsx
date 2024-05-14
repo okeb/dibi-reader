@@ -13,7 +13,7 @@ export default function ShareButton({
     console.log('capturing');
   }
   useHotkeys([
-    ['C', () => capture()],
+    // ['C', () => capture()],
   ]);
   return (
     <HoverCard shadow="md" openDelay={1300} closeOnEscape={true}>

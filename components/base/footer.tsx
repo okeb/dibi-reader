@@ -11,9 +11,21 @@ import StatisticsButton from '../setting/statistics';
 import BlogButton from '../setting/blog';
 import ShareButton from '../setting/share';
 import BackGroundButton from '../setting/backGround';
-import BugMesssageButton from '../setting/bugMessage';
+import BugMessageButton from '../setting/bugMessage';
 
-export default function Footer({value, openEye}:{ value?: string, openEye?: boolean}) {
+export default function Footer({
+  value, 
+  openEye,
+  timeago,
+  timmeagouniq,
+  timeinterval
+}:{ 
+  value?: string, 
+  openEye?: boolean,
+  timeinterval?: boolean,
+  timeago?: number,
+  timmeagouniq?: number,
+}) {
   const os = useOs();
   return (
     <footer className={classes.footer}>
@@ -21,18 +33,18 @@ export default function Footer({value, openEye}:{ value?: string, openEye?: bool
       display: 'flex',
       justifyContent: 'end'
     }}>
-      <div className={classes.toggle} style={{display: `${openEye ? 'flex' : 'none'}`,}}>
+      <div className={classes.toggle} style={{opacity: `${openEye ? 1 : 0 }`, transition: 'opacity .7s'}}>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v14m4-10l-4-4M8 9l4-4"></path></svg>
       </div>
     </div>
 
     <div className={classes.menu}>
-      <BugMesssageButton className={classes.menuItem} />
+      <BugMessageButton className={classes.menuItem} />
       <ShareButton className={classes.menuItem} />
       <BlogButton className={classes.menuItem} />
       <CopySettingButton className={classes.menuItem} value={ value ? value : '' } />
       <FullScreenButton className={classes.menuItem}/>
-      <StatisticsButton className={classes.menuItem} />
+      <StatisticsButton className={classes.menuItem} timeago={timeago} openEye={openEye} timeagouniq={timmeagouniq} timeinterval={timeinterval} />
       <ScreenCaptureButton className={classes.menuItem} />
       <BackGroundButton className={classes.menuItem} />
       <div className={classes.menuItem}>

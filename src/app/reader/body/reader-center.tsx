@@ -1,11 +1,14 @@
 'use client'
 
-import { useCounter, useFetch, useHotkeys } from '@mantine/hooks';
+import { useCounter, useDocumentTitle, useDocumentVisibility, useFetch, useHotkeys, useIdle, useInterval, useNetwork } from '@mantine/hooks';
 import classes from './ReaderCenter.module.scss'
 import Starfield from 'react-starfield';
 import TypoSize from '../../../../components/actions/typoSize';
 import Annexe from '../../../../components/actions/annexe';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { TextGenerateEffect } from '../../../../components/base/verset';
+import { Skeleton } from '@mantine/core';
+import FormatTime from '../../../../components/base/utilities';
 
 interface Item {
   livre: string;
@@ -21,40 +24,75 @@ function ReaderCenter({
 }: {
   openEye: boolean
 }) {
+
+
   const { data, loading, error, refetch, abort } = useFetch<Item[]>(
     'https://www.shemaproject.org/bym/'
   );
-
   const [count, handlers] = useCounter(25, { min: 17, max: 50 });
   const [showStarfield, setShowStarfield ] = useState(false)
+  useDocumentTitle(`Bible Reader: ${data ? data.verset : ''}`);
   useHotkeys([
     ['shift+R', () => refetch()],
     ['mod+.', () => setShowStarfield(!showStarfield)],
   ]);
-
+  const networkStatus = useNetwork();
+  const [seconds, setSeconds] = useState(0);
+  const documentState = useDocumentVisibility();
+  const idle = useIdle(14000, { initialState: false });
+  const interval = useInterval(() => setSeconds((s) => s + 1), 1000);
+  useEffect(() => {
+    if (documentState != 'hidden'  && !idle) {
+      interval.start();
+    }else {
+      interval.stop();
+    }
+  }, [documentState, idle]);
+  useEffect(() => {
+    setSeconds(0)
+    interval.start();
+  }, [data])
   
   return (
     <>
-    {showStarfield ? (
-      <Starfield
-        starCount={300}
-        starColor={[255, 255, 255]}
-        speedFactor={0.02}
-        backgroundColor="black"
-      />
-    ) : (
-      <></>
-    )}
-  
+      {showStarfield ? (
+        <Starfield
+          starCount={300}
+          starColor={[255, 255, 255]}
+          speedFactor={0.02}
+          backgroundColor="black"
+        />
+      ) : (
+        <></>
+      )}
+      
+
       <section className={classes.sectionBody}>
 
           <p style={{
-          
             fontStyle: 'italic',
             marginBottom: '25px',
             marginLeft: '10px',
+            width: '100%'
           }}>
-            {data ? data.verset : 'Fetching'}
+            
+              {!loading && data && networkStatus.online ? (
+                <>
+                  <TextGenerateEffect words={data.verset.split(':')[0]} delay={0.4} />
+                </>
+              ) : (
+                <>
+                  {!networkStatus.online ? (
+                    <>
+                      <TextGenerateEffect words={"Vous n'êtes pas connecté.e"} delay={0.17} duration={1}/>
+                    </>
+                  ):(
+                    <>
+                      <Skeleton height={8} mb={14} radius="xl" width="60px"/>
+                    </>
+                  )}
+                </>
+              )}
           </p>
         <div
         style={{
@@ -63,7 +101,8 @@ function ReaderCenter({
         >
           <div
           style={{
-            paddingInline: '7px'
+            paddingInline: '7px',
+            minWidth: '4%'
           }}
           >
             <p
@@ -71,19 +110,58 @@ function ReaderCenter({
               color: 'white',
               fontSize: '.9rem',
               fontStyle: 'italic',
-              fontWeight: 'bold'
+              fontWeight: 'bold',
             }}
-            >{data ? data.verset.split(':')[1] : 'Fetching'}</p>
-          </div>
-          <div>
-            <p className={classes.verset} id='verset' style={{ fontSize: `${count}px`}}>
-              {(data && data.ecrit) ? data.ecrit : 'Fetching'}
-              {/* Celui donc qui aura renversé l'un de ces plus petits commandements et qui aura ainsi enseigné les gens, sera appelé le plus petit dans le Royaume des cieux. Mais celui qui les observera et qui enseignera à les observer, celui-là sera appelé grand dans le Royaume des cieux. */}
+            >
+              
+              {!loading && data && networkStatus.online ? (
+                <TextGenerateEffect words={data.verset.split(':')[1]} duration={2} />
+              ) : (
+              <>
+              {!networkStatus.online ? (
+                    <>
+                      <TextGenerateEffect words={'?'} delay={0.17} duration={1}/>
+                    </>
+                  ):(
+                    <>
+                      <Skeleton height={8} radius="xl" width="100%"/>
+                    </>
+                  )}
+              </>
+            )}
             </p>
+
+          </div>
+          <div style={{width: '100%'}}>
+            
+
+            <p className={classes.verset} id='verset' style={{ fontSize: `${count}px`}}>
+              {!loading && data && networkStatus.online ? (
+                <TextGenerateEffect words={data.ecrit} delay={0.17} duration={1}/>
+              ) : (
+                <>
+                  {!networkStatus.online ? (
+                    <>
+                      <TextGenerateEffect words={'Veuillez verifier votre connexion internet...'} delay={0.17} duration={1}/>
+                    </>
+                  ):(
+                    <>
+                      <Skeleton height={count-7} radius="xl" mt={10}/>
+                      <Skeleton height={count-7} mt={14} radius="xl"/>
+                      <Skeleton height={count-7} mt={14} width="70%" radius="xl"/>
+                    </>
+                  )}
+                </>
+              )}
+            </p>
+            
             <div
               style={{
-                display: `${openEye ? 'flex' : 'none'}`,
+                // display: `${openEye ? 'flex' : 'none'}`,
+                opacity: `${openEye ? 1 : 0 }`,
+                display: 'flex',
                 alignItems: 'center',
+                transition: 'opacity .5s',
                 justifyContent: 'space-between',
                 marginTop: '1rem',
               }}
@@ -122,6 +200,7 @@ function ReaderCenter({
                 </button>
               </div>
             </div>
+            
           </div>
         </div>
 

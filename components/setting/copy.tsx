@@ -1,4 +1,5 @@
-import { CopyButton, Tooltip, ActionIcon } from '@mantine/core';
+import { CopyButton, Tooltip, ActionIcon, Indicator } from '@mantine/core';
+import { useHotkeys } from '@mantine/hooks';
 
 export default function CopySettingButton({
   className,
@@ -6,13 +7,17 @@ export default function CopySettingButton({
 }:{
   className?: string,
   value: string,
+  
 }) {
+  useHotkeys([
+    // ['C', () => capture()],
+  ]);
   return (
+    <Indicator inline size={7} color="yellow" style={{fontFamily: 'monospace', fontSize: '2px'}}>
       <CopyButton value={value} timeout={2000}>
         {({ copied, copy }) => (
           <Tooltip label={copied ? 'Copié !' : 'Copie ?'} color={'gray'} withArrow position="top">
-            <ActionIcon color={'gray'} variant="subtle" onClick={copy}>
-              
+            <ActionIcon color={'gray'} variant="subtle" onClick={copy}>            
               <div className={className}>
                 {copied ? (
                   <svg xmlns="http://www.w3.org/2000/svg" width='1.4rem' viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m5 12l5 5L20 7"></path></svg>
@@ -25,5 +30,6 @@ export default function CopySettingButton({
           </Tooltip>
         )}
       </CopyButton>
+    </Indicator>
   );
 }

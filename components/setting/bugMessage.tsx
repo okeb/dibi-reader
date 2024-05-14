@@ -1,7 +1,7 @@
 import { HoverCard, Text } from '@mantine/core';
 import { useHotkeys } from '@mantine/hooks';
 
-export default function BugMesssageButton({
+export default function BugMessageButton({
   className
 }:{
   className?: string
