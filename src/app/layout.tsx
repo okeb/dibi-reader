@@ -25,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="fr">
       <Head>
         <link rel="apple-touch-icon" sizes="180x180" href="/public/assets/favicon/apple-touch-icon.png"/>
         <link rel="icon" type="image/png" sizes="32x32" href="/public/assets/favicon/favicon-32x32.png"/>
@@ -46,7 +46,9 @@ export default function RootLayout({
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',
           }}
-          >{children}</body>
+          >
+            {children}
+          </body>
         </ModalsProvider>
       </MantineProvider>
     </html>

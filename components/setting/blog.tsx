@@ -10,7 +10,7 @@ export default function BlogButton({
     console.log('capturing');
   }
   useHotkeys([
-    ['C', () => capture()],
+    ['B', () => capture()],
   ]);
   return (
     <HoverCard shadow="md" openDelay={1300} closeOnEscape={true}>

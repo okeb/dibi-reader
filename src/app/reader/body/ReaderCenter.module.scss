@@ -6,13 +6,38 @@
   padding-bottom: 3rem;
   margin: auto;
   justify-content: center;
+  &_simple {
+    height: fit-content;
+    margin-right: 34px;
+  }
+  .p_book {
+    font-style: italic;
+    margin-bottom: 25px;
+    margin-left: 10px;
+    width: 100%;
+    min-width: 100px;
+    font-size: 1rem;
+  }
+  .box_num_verset {
+    padding-inline: 7px;
+    min-width: 4%;
+    .p_num_verset {
+      color: white;
+      font-size: .9rem;
+      font-style: italic;
+      font-weight: bold;
+    }
+  }
 } 
 
 .verset {
   color: 'white';
   font-size: 1.6rem;
   font-style: italic;
+  margin-right:10px;
   padding-top: 2px;
+  min-width: 100%;
+
   &:hover {
     color: white;
   }
