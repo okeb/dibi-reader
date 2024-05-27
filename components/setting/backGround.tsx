@@ -1,4 +1,4 @@
-import { Box, HoverCard, Popover, Text } from '@mantine/core';
+import { Box, HoverCard, Popover, Text, useMantineColorScheme } from '@mantine/core';
 import { useHotkeys } from '@mantine/hooks';
 import { useState } from 'react';
 import WallpapersList from './backGround/wallpapersList';
@@ -14,6 +14,7 @@ export default function BackGroundButton({
   useHotkeys([
     ['mod+\'', () => setOpened(!opened)],
   ]);
+  const { colorScheme, setColorScheme } = useMantineColorScheme();
   return (
     <Popover
       position="top-end"
@@ -33,7 +34,7 @@ export default function BackGroundButton({
               </button>
             </HoverCard.Target>
 
-            <HoverCard.Dropdown style={{padding: '2px 8px', borderRadius: '8px', marginTop: '10px', backgroundColor: 'rgb(0,0,0)'}}>
+            <HoverCard.Dropdown style={{padding: '2px 8px', borderRadius: '8px', marginTop: '10px', backgroundColor: (colorScheme === 'dark')? 'rgb(0,0,0)':'white'}}>
                 <Text size="xs" style={{fontFamily: 'monospace'}}>Changer le fond d'écran</Text>
             </HoverCard.Dropdown>
 

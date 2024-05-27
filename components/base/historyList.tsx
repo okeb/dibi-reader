@@ -10,13 +10,13 @@ interface history {
 export default function  HistoryList({
   sharedHistory
 }:{
-  sharedHistory: history
+  sharedHistory?: history
 }) {
   
   return  (
       <Box> 
         <ScrollArea h={300} offsetScrollbars scrollbarSize={4} type="scroll" mx="auto" 
-        className={ classes.history } >
+        className={ classes.history }>
         {(sharedHistory && sharedHistory.history && sharedHistory.history.length > 1) ? (
           <Stack className={ classes.stack }  
           align="flex-start"

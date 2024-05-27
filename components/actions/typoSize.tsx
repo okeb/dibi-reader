@@ -1,8 +1,8 @@
 'use client'
 import React, { MouseEventHandler } from 'react'
 import { useState } from 'react';
-import { NumberFormatter, Paper, Popover} from '@mantine/core';
-import { useClickOutside, useHotkeys } from '@mantine/hooks';
+import { NumberFormatter, Paper, Popover, useMantineColorScheme} from '@mantine/core';
+import { useHotkeys } from '@mantine/hooks';
 import classes from './action.module.scss'
 
 
@@ -24,6 +24,7 @@ export default function TypoSize(
     ['shift+ArrowDown', () => handlers.decrement()],
     ['L', () => handlers.decrement()],
   ]);
+  const { colorScheme, setColorScheme } = useMantineColorScheme();
   return (
     <Popover
       position='bottom-start'
@@ -44,8 +45,8 @@ export default function TypoSize(
 
       <Popover.Dropdown
         style={{
-          backgroundColor: 'rgba(20, 20, 20, .5)',
-          border: '1px solid rgba(255, 255, 255,.2)',
+          backgroundColor: (colorScheme === 'dark')? 'rgba(20, 20, 20, .5)' :'rgba(255, 255, 255, .5)',
+          border: (colorScheme === 'dark')? '1px solid rgba(255, 255, 255,.2)' :'1px solid rgba(0, 0, 0,.2)',
           borderRadius: '12px',
           backdropFilter: 'blur(4px)',
           padding: '0'

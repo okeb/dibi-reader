@@ -1,5 +1,8 @@
+
+// Media query pour le mode clair (optionnel, si vous souhaitez être explicite)
+
 .sectionBody {
-  height: calc(100vh);
+  height: calc(100vh - 32px);
   display: flex;
   flex-direction: column;
   width: 45rem;
@@ -22,7 +25,7 @@
     padding-inline: 7px;
     min-width: 4%;
     .p_num_verset {
-      color: white;
+      // color: $verset-color;
       font-size: .9rem;
       font-style: italic;
       font-weight: bold;
@@ -31,7 +34,7 @@
 } 
 
 .verset {
-  color: 'white';
+  // color: $verset-color;
   font-size: 1.6rem;
   font-style: italic;
   margin-right:10px;
@@ -39,13 +42,13 @@
   min-width: 100%;
 
   &:hover {
-    color: white;
+    // color: $verset-color;
   }
 }
 
 
 .link {
-  color:white;
+  // color: $verset-color;
   opacity: .3;
   transition: all;
   transition-duration: .3s;
@@ -60,7 +63,7 @@
 }
 
 .linkAction {
-  color:white;
+  // color: $verset-color;
   opacity: .3;
   transition: all;
   transition-duration: .3s;
@@ -74,3 +77,20 @@
     opacity: 1;
   }
 }
+
+.verset_output_area {
+    overflow: hidden;
+    &::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      border-radius: inherit;
+      background: inherit;
+      filter: blur(10px);
+    }
+}
+
+        

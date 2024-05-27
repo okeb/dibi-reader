@@ -18,7 +18,6 @@ export const metadata: Metadata = {
 const theme = createTheme({
   /** Put your mantine theme override here */
 });
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -40,8 +39,6 @@ export default function RootLayout({
           <Notifications />
           <body className={inter.className} 
           style={{
-            backgroundColor: "#010101",
-            color:"white",
             backgroundImage: `url('/assets/images/bghero-light.webp')`,
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',

@@ -1,11 +1,12 @@
-import { Kbd, Grid, Text, Paper, Divider, Space, Stack } from '@mantine/core';
+import { Kbd, Grid, Text, Paper, Divider, Space, Stack, useMantineColorScheme } from '@mantine/core';
 import classes from './list.module.scss'
-import { useOs } from '@mantine/hooks';
+import { readLocalStorageValue, useOs } from '@mantine/hooks';
 
 export default function KeyBindingList() {
+  const { colorScheme, setColorScheme } = useMantineColorScheme();
   const os = useOs();
   return (
-    <Paper shadow="lg" radius="md" p="xl" style={{padding: '0 20px', backgroundColor: 'rgba(20, 20, 20, .5)', border: '1px solid rgba(255, 255, 255,.1)', borderRadius: '12px', backdropFilter: 'blur(4px)' }}>
+    <Paper shadow="lg" radius="md" p="xl" style={{padding: '0 20px', backgroundColor: (colorScheme === 'dark')? 'rgba(20, 20, 20, .5)':'rgba(255, 255, 255, .5)', border: '1px solid rgba(255, 255, 255,.1)', borderRadius: '12px', backdropFilter: 'blur(4px)' }}>
       <Stack
         align="stretch"
         justify="center"

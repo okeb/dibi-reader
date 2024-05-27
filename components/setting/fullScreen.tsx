@@ -1,4 +1,4 @@
-import { HoverCard, Text } from '@mantine/core';
+import { HoverCard, Text, useMantineColorScheme } from '@mantine/core';
 import { useFullscreen, useHotkeys } from '@mantine/hooks';
 
 export default function FullScreenButton({
@@ -10,6 +10,7 @@ export default function FullScreenButton({
   useHotkeys([
     ['Alt + F', () => toggle()],
   ]);
+  const { colorScheme, setColorScheme } = useMantineColorScheme();
   return (
     <HoverCard shadow="md" openDelay={1300} closeOnEscape={true}>
 
@@ -24,7 +25,7 @@ export default function FullScreenButton({
         </button>
       </HoverCard.Target>
 
-      <HoverCard.Dropdown style={{padding: '2px 8px', borderRadius: '8px', marginTop: '10px', backgroundColor: 'rgb(0,0,0)'}}>
+      <HoverCard.Dropdown style={{padding: '2px 8px', borderRadius: '8px', marginTop: '10px', backgroundColor: (colorScheme === 'dark')? 'rgb(0,0,0)':'white'}}>
           <Text size="xs" td={fullscreen ? "line-through" : '' } style={{fontFamily: 'monospace'}}>Plein écran</Text>
       </HoverCard.Dropdown>
 

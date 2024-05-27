@@ -2,10 +2,18 @@
 import React, { MouseEventHandler } from 'react'
 import { useState } from 'react';
 import {  Popover} from '@mantine/core';
-import { useHotkeys } from '@mantine/hooks';
+import { useHotkeys, useListState } from '@mantine/hooks';
 import classes from './action.module.scss'
 
 
+interface signet {
+  verset: string,
+  ecrit: string,
+  livre_nom_complet: string,
+  livre: string,
+  chapitre: number,
+  num_verset: number
+}
 export default function ToggleSignet(
   {
     // handlers
@@ -17,6 +25,28 @@ export default function ToggleSignet(
   }
 ) {
   const [opened, setOpened] = useState(false);
+  const [bookmark, handlersBookmark] = useListState<signet>([]);
+
+  function toggleCurrentToBookmark(currentVerset: signet){
+    const result = handlersBookmark.filter((item: signet) => item.verset === currentVerset.verset)
+    if (result) {
+      console.log("remove the verset");
+    } else {
+      handlersBookmark.append(
+        {
+          verset: currentVerset.verset,
+          ecrit: currentVerset.ecrit,
+          livre_nom_complet: currentVerset.livre_nom_complet,
+          livre: currentVerset.livre,
+          chapitre: currentVerset.chapitre,
+          num_verset: currentVerset.num_verset
+        }
+      )
+    }
+  }
+
+
+
   useHotkeys([
     ['A', () => console.log('toggle signet') ],
   ]);

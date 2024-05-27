@@ -1,4 +1,4 @@
-import { HoverCard, Text } from '@mantine/core';
+import { HoverCard, Text, useMantineColorScheme } from '@mantine/core';
 import { useHotkeys, useLocalStorage } from '@mantine/hooks';
 import { useEffect, useState } from 'react';
 import superjson from 'superjson';
@@ -32,6 +32,7 @@ export default function ToggleDetailsVisibilityButton({
     ['mod+/', () => setVisibility((!detailsVisibility))],
 
   ]);
+  const { colorScheme, setColorScheme } = useMantineColorScheme();
   return (
     <HoverCard shadow="md" openDelay={1300} closeOnEscape={true}>
       <HoverCard.Target>
@@ -49,7 +50,7 @@ export default function ToggleDetailsVisibilityButton({
         </button>
       </HoverCard.Target>
 
-      <HoverCard.Dropdown style={{padding: '2px 8px', borderRadius: '8px', marginTop: '10px', backgroundColor: 'rgb(0,0,0)'}}>
+      <HoverCard.Dropdown style={{padding: '2px 8px', borderRadius: '8px', marginTop: '10px', backgroundColor: (colorScheme === 'dark')? 'rgb(0,0,0)':'white'}}>
           <Text size="xs" style={{fontFamily: 'monospace'}}>{detailsVisibility ? 'Masquer' : 'Voir'} les actions</Text>
       </HoverCard.Dropdown>
 
