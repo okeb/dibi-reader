@@ -10,8 +10,18 @@ export default function FormatTime(seconds: number): string {
     return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
 }
 
-export function GetFullName(abbr: string): string {
-    const complet_list = [{
+type Abbreviation = "Ge. " | "Ex. " | "Lé. " | "No. " | "De. " | "Jos. " | "Jg. " | 
+                    "1 S. " | "2 S. " | "1 R. " | "2 R. " | "Es. " | "Jé. " | "Ez. " | 
+                    "Os. " | "Joë. " | "Am. " | "Ab. " | "Jon. " | "Mi. " | "Na. " | 
+                    "Ha. " | "So. " | "Ag. " | "Za. " | "Mal. " | "Ps. " | "Pr. " | 
+                    "Job " | "Ca. " | "Ru. " | "La. " | "Ec. " | "Est. " | "Da. " | 
+                    "Esd. " | "Né. " | "1 Ch. " | "2 Ch. " | "Mt. " | "Mc. " | "Lu. " | 
+                    "Jn. " | "Ac. " | "Ja. " | "Ga. " | "1 Th. " | "2 Th. " | "1 Co. " | 
+                    "2 Co. " | "Ro. " | "Ep. " | "Ph. " | "Col. " | "Phm. " | "1 Ti. " | 
+                    "Tit. " | "1 Pi. " | "2 Pi. " | "2 Ti. " | "Jud. " | "Hé. " | 
+                    "1 Jn. " | "2 Jn. " | "3 Jn. " | "Ap. ";
+
+const completList: Record<Abbreviation, string> = {
     "Ge. ": "Bereshit (Génèse)",
     "Ex. ": "Shemot (Exode)",
     "Lé. ": "Viyaqra (Lévitique)",
@@ -77,11 +87,10 @@ export function GetFullName(abbr: string): string {
     "1 Jn. ": "1 Yohanan (1 Jean)",
     "2 Jn. ": "2 Yohanan (2 Jean)",
     "3 Jn. ": "3 Yohanan (3 Jean)",
-    "Ap. ": "Apokalupsis (Apocalypse)",
-    }];
-    
-    return complet_list[0][abbr]
+    "Ap. ": "Apokalupsis (Apocalypse)"
+};
 
-
+export function GetFullName(abbr: Abbreviation): string {
+    return completList[abbr] || "Abbreviation not found";
 }
 
