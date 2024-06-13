@@ -29,23 +29,17 @@ export default function ToggleSignet(
 
   function toggleCurrentToBookmark(currentVerset: signet){
     const result = handlersBookmark.filter((item: signet) => item.verset === currentVerset.verset)
-    if (result) {
-      console.log("remove the verset");
-    } else {
-      handlersBookmark.append(
-        {
-          verset: currentVerset.verset,
-          ecrit: currentVerset.ecrit,
-          livre_nom_complet: currentVerset.livre_nom_complet,
-          livre: currentVerset.livre,
-          chapitre: currentVerset.chapitre,
-          num_verset: currentVerset.num_verset
-        }
-      )
-    }
+    handlersBookmark.append(
+      {
+        verset: currentVerset.verset,
+        ecrit: currentVerset.ecrit,
+        livre_nom_complet: currentVerset.livre_nom_complet,
+        livre: currentVerset.livre,
+        chapitre: currentVerset.chapitre,
+        num_verset: currentVerset.num_verset
+      }
+    )
   }
-
-
 
   useHotkeys([
     ['A', () => console.log('toggle signet') ],
