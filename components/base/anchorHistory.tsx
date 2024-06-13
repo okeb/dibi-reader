@@ -5,11 +5,11 @@ import classes from './footer.module.scss';
 
 export default function AnchorHistory({
   index=0,
-  item='',
+  item=[],
   sharedHistoryCurrent,
 }:{
   index?: number,
-  item?:(string | number)[]
+  item?:(string)[]  
   sharedHistoryCurrent: number,
 
 }) {
