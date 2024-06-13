@@ -45,3 +45,44 @@
     }
   }
 }
+
+.history {
+  background-color: transparent;
+  position: absolute;
+  width: fit-content;
+  height: 0;
+  padding: 35px;
+  padding-top: 0;
+  padding-bottom: 30;
+  left: 0;
+  bottom: 0;
+  overflow: hidden;
+  transition: height 0.7s ease-in-out;
+  &:hover {
+    height: 300px;
+    overflow-y: scroll;
+    transition: height 1s ease-in-out;
+  }
+  .stack {
+    transition: width 0.3s;
+    width: fit-content;
+    margin-bottom: 10px;
+    &:hover {
+      transition: width 0.5s ease-in-out;
+    }
+  }
+
+  .historyItem {
+    padding: 0;
+    color: white;
+    opacity: 0.3;
+    font-size: 12px;
+    transition: all 0.5s;
+    height: 0 !important;
+    &:hover {
+      transition: opacity 0.5s;
+      opacity: .7;
+      text-decoration: none;
+    }
+  }
+}

@@ -1,6 +1,9 @@
 import React from 'react'
-import Image from "next/image"
 import logoDiBi from './../../public/assets/images/logo dibi-black-forexport.svg'
+import logoDiBiBlack from './../../public/assets/favicon/safari-pinned-tab.svg'
+import { readLocalStorageValue } from '@mantine/hooks';
+import { Image } from '@mantine/core'
+
 
 export default function Header() {
   return (
@@ -18,9 +21,17 @@ export default function Header() {
       backgroundColor: 'rgba( 20, 20, 20, 0)',
     }}>
       <Image 
-        src={logoDiBi}
+        lightHidden
+        src={logoDiBi.src}
+        style={{color: 'red'}}
         alt="logo of DiBi Reader"
-        width={60}
+        w={60}
+      />
+      <Image 
+        darkHidden
+        src={logoDiBiBlack.src}
+        style={{width: '37px', paddingBlock: '10px'}}
+        alt="logo of DiBi Reader"
       />
     </div>
   )

@@ -1,0 +1,11 @@
+.rows {
+  display: flex;
+  justify-content: end;
+  .key {
+    display: flex;
+    justify-content: start;
+  }
+  .text {
+    line-height: 24px;
+  }
+}

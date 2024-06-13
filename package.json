@@ -14,10 +14,17 @@
     "@mantine/modals": "^7.9.1",
     "@mantine/notifications": "^7.9.1",
     "@tabler/icons-react": "^3.3.0",
+    "@tsparticles/engine": "^3.4.0",
+    "@tsparticles/react": "^3.0.0",
+    "@tsparticles/slim": "^3.4.0",
+    "clsx": "^2.1.1",
+    "framer-motion": "^11.2.0",
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18",
-    "react-starfield": "^1.0.3"
+    "react-starfield": "^1.0.3",
+    "superjson": "^2.2.1",
+    "tailwind-merge": "^2.3.0"
   },
   "devDependencies": {
     "@types/node": "^20",

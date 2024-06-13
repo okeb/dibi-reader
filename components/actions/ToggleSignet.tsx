@@ -1,30 +1,55 @@
 'use client'
 import React, { MouseEventHandler } from 'react'
 import { useState } from 'react';
-import { NumberFormatter, Paper, Popover, useMantineColorScheme} from '@mantine/core';
-import { useHotkeys } from '@mantine/hooks';
+import {  Popover} from '@mantine/core';
+import { useHotkeys, useListState } from '@mantine/hooks';
 import classes from './action.module.scss'
 
 
-export default function TypoSize(
+interface signet {
+  verset: string,
+  ecrit: string,
+  livre_nom_complet: string,
+  livre: string,
+  chapitre: number,
+  num_verset: number
+}
+export default function ToggleSignet(
   {
-    count, handlers
+    // handlers
   }: {
-    count: number, 
-    handlers: {
-      decrement: MouseEventHandler<HTMLButtonElement>,
-      increment: MouseEventHandler<HTMLButtonElement>,
-    }
+    // handlers: {
+    //   decrement: MouseEventHandler<HTMLButtonElement>,
+    //   increment: MouseEventHandler<HTMLButtonElement>,
+    // }
   }
 ) {
   const [opened, setOpened] = useState(false);
+  const [bookmark, handlersBookmark] = useListState<signet>([]);
+
+  function toggleCurrentToBookmark(currentVerset: signet){
+    const result = handlersBookmark.filter((item: signet) => item.verset === currentVerset.verset)
+    if (result) {
+      console.log("remove the verset");
+    } else {
+      handlersBookmark.append(
+        {
+          verset: currentVerset.verset,
+          ecrit: currentVerset.ecrit,
+          livre_nom_complet: currentVerset.livre_nom_complet,
+          livre: currentVerset.livre,
+          chapitre: currentVerset.chapitre,
+          num_verset: currentVerset.num_verset
+        }
+      )
+    }
+  }
+
+
+
   useHotkeys([
-    ['shift+ArrowUp', () => handlers.increment],
-    ['G', () => handlers.increment],
-    ['shift+ArrowDown', () => handlers.decrement],
-    ['L', () => handlers.decrement],
+    ['A', () => console.log('toggle signet') ],
   ]);
-  const { colorScheme, setColorScheme } = useMantineColorScheme();
   return (
     <Popover
       position='bottom-start'
@@ -39,14 +64,14 @@ export default function TypoSize(
     >
       <Popover.Target>
         <button className={classes.link} style={{ opacity: `${opened ? 1 : .3}`}}>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7V5h13v2m-6-2v14m2 0H8m7-6v-1h6v1m-3-1v7m-1 0h2"></path></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 7v14l-6-4l-6 4V7a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4"></path></svg>
         </button>
       </Popover.Target>
 
-      <Popover.Dropdown
+      {/* <Popover.Dropdown
         style={{
-          backgroundColor: (colorScheme === 'dark')? 'rgba(20, 20, 20, .5)' :'rgba(255, 255, 255, .5)',
-          border: (colorScheme === 'dark')? '1px solid rgba(255, 255, 255,.2)' :'1px solid rgba(0, 0, 0,.2)',
+          backgroundColor: 'rgba(20, 20, 20, .5)',
+          border: '1px solid rgba(255, 255, 255,.2)',
           borderRadius: '12px',
           backdropFilter: 'blur(4px)',
           padding: '0'
@@ -79,7 +104,7 @@ export default function TypoSize(
             </p>
           </button>
         </Paper>
-      </Popover.Dropdown>
+      </Popover.Dropdown> */}
     </Popover>
   );
 }

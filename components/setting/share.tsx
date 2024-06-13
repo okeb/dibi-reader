@@ -1,4 +1,4 @@
-import { HoverCard, Text } from '@mantine/core';
+import { HoverCard, Text, useMantineColorScheme } from '@mantine/core';
 import { useHotkeys } from '@mantine/hooks';
 import { useState } from 'react';
 
@@ -13,8 +13,9 @@ export default function ShareButton({
     console.log('capturing');
   }
   useHotkeys([
-    ['C', () => capture()],
+    // ['C', () => capture()],
   ]);
+  const { colorScheme, setColorScheme } = useMantineColorScheme();
   return (
     <HoverCard shadow="md" openDelay={1300} closeOnEscape={true}>
       <HoverCard.Target>
@@ -23,7 +24,7 @@ export default function ShareButton({
         </button>
       </HoverCard.Target>
 
-      <HoverCard.Dropdown style={{padding: '2px 8px', borderRadius: '8px', marginTop: '10px', backgroundColor: 'rgb(0,0,0)'}}>
+      <HoverCard.Dropdown style={{padding: '2px 8px', borderRadius: '8px', marginTop: '10px', backgroundColor: (colorScheme === 'dark')? 'rgb(0,0,0)':'white'}}>
           <Text size="xs" style={{fontFamily: 'monospace'}}>Partager le verset</Text>
       </HoverCard.Dropdown>
 

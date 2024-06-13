@@ -1,5 +1,4 @@
 .link {
-  color:white;
   opacity: .3;
   transition: all;
   transition-duration: .3s;
@@ -51,7 +50,7 @@
     height: 30px;
     cursor: default;
     &:hover {
-      background: #000;
+      opacity: 1;
     }
     p.icon {
       width: 3rem;
@@ -72,7 +71,7 @@
     border-radius: 7px;
     display: flex;
     align-items: center;
-    color: rgba(255, 255, 255,.7);
+    opacity: .7;
     justify-content: center;
     transition: all .2s;
     width: 33px;
@@ -82,7 +81,7 @@
       background: rgba(255, 255, 255,.03);
       cursor: pointer;
       // color: rgb(255, 149, 0);
-      color: rgb(255, 255, 255);
+      opacity: 1;
     }
     p.icon {
       width: 3rem;

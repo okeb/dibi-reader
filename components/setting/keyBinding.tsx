@@ -1,7 +1,7 @@
-import { HoverCard, Popover, Text } from '@mantine/core';
+import { HoverCard, Popover, Text, useMantineColorScheme } from '@mantine/core';
 import KeyBindingList from './keyBinding/list';
 import { useState } from 'react';
-import { useHotkeys } from '@mantine/hooks';
+import {  useHotkeys } from '@mantine/hooks';
 
 export default function KeyBindingButton({
   className
@@ -12,6 +12,7 @@ export default function KeyBindingButton({
   useHotkeys([
     ['mod+,', () => setOpened(!opened)],
   ]);
+  const { colorScheme, setColorScheme } = useMantineColorScheme();
   return (
     <Popover
       position="top-end"
@@ -30,7 +31,7 @@ export default function KeyBindingButton({
               </button>
             </HoverCard.Target>
             {!opened ? (
-              <HoverCard.Dropdown style={{padding: '2px 8px', borderRadius: '8px', marginTop: '10px', backgroundColor: 'rgb(0,0,0)'}}>
+              <HoverCard.Dropdown style={{padding: '2px 8px', borderRadius: '8px', marginTop: '10px', backgroundColor: (colorScheme === 'dark')? 'rgb(0,0,0)':'white'}}>
                   <Text size="xs" style={{fontFamily: 'monospace'}}>liste des Commandes</Text>
               </HoverCard.Dropdown>
             ): (
