@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CloseButton, Input } from '@mantine/core';
+import { CloseButton, Input, Text } from '@mantine/core';
 import { getHotkeyHandler } from '@mantine/hooks';
 
 // const groceries = ['🍎 Apples', '🍌 Bananas', '🥦 Broccoli', '🥕 Carrots', '🍫 Chocolate'];
@@ -26,31 +26,33 @@ export default function SearchInput({goto, close}:{goto:Function, close:Function
   }
 
   return (
-    <Input.Wrapper style={{fontFamily: 'monospace', fontSize: '17px'}} id="search-input" label="Recherchez..." description="Taper votre recherche en separant le livre, le chapitre et votre selection par un espace" >
-      <Input
-        id="search-input"
-        data-autofocus
-        variant="filled"
-        ff={'monospace'}
-        placeholder={"1co 2 1-7"}
-        value={value}
-        onChange={(event) => setValue(event.currentTarget.value)}
-        rightSectionPointerEvents="all"
-        mt="md"
-        onKeyDown={getHotkeyHandler([
-          ['mod+Enter', () => runSearch(value)],
-          ['mod+Delete', () => setValue('') ],
-          ['shift+R', () => close() ],
-          ['mod+K', () => close() ],
-        ])}
-        rightSection={
-          <CloseButton
-            aria-label="Clear input"
-            onClick={() => setValue('')}
-            style={{ display: value ? undefined : 'none' }}
-          />
-        }
-      />
-    </Input.Wrapper>
+    <>
+      <Input.Wrapper style={{fontFamily: 'monospace', fontSize: '17px'}} id="search-input" label="..." labelElement='div' description="Taper votre recherche en separant le livre, le chapitre et votre selection par un espace" >
+        <Input
+          id="search-input"
+          data-autofocus
+          variant="filled"
+          ff={'monospace'}
+          placeholder={"1co 2 1-7"}
+          value={value}
+          onChange={(event) => setValue(event.currentTarget.value)}
+          rightSectionPointerEvents="all"
+          mt="md"
+          onKeyDown={getHotkeyHandler([
+            ['mod+Enter', () => runSearch(value)],
+            ['mod+Delete', () => setValue('') ],
+            ['shift+R', () => close() ],
+            ['mod+K', () => close() ],
+          ])}
+          rightSection={
+            <CloseButton
+              aria-label="Clear input"
+              onClick={() => setValue('')}
+              style={{ display: value ? undefined : 'none' }}
+            />
+          }
+        />
+      </Input.Wrapper>
+    </>
   );
 }

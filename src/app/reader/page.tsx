@@ -90,7 +90,6 @@ export default function page() {
         }}
         >
           <BookmarkDrawer />
-          <ReaderCenter openEye={openEye} onHistoryChange={handleHistoryChange} />
           {showStarfield ? (
             <>
               <div style={{
@@ -120,6 +119,7 @@ export default function page() {
           ) : (
             <></> 
           )}
+          <ReaderCenter openEye={openEye} onHistoryChange={handleHistoryChange} />
         </AppShell.Main>
 
         <AppShellFooter>

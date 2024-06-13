@@ -5,7 +5,7 @@ import logoDiBi from './../../public/assets/images/logo dibi-black-forexport.svg
 import logoDiBiBlack from './../../public/assets/favicon/safari-pinned-tab.svg'
 import SearchInputPlus from './searchInputPlus';
 
-export default function SearchDrawer({goto}:{goto:Function}) {
+export default function SearchDrawer({goto, openEye}:{goto:Function, openEye:boolean}) {
   const [opened, { open, close }] = useDisclosure(false);
 
   useHotkeys([
@@ -39,7 +39,7 @@ export default function SearchDrawer({goto}:{goto:Function}) {
               top: '0',
               left: '0',
               right: '0',
-              zIndex: "10000",
+              zIndex: "1000",
             }}
           >
             <Image 
@@ -57,12 +57,16 @@ export default function SearchDrawer({goto}:{goto:Function}) {
             />
           </div>
           <Space h={100}/>
+
+
+          <Text size='20px' ff={'monospace'}>Recherchez</Text>
+
           {/* <SearchInput goto={goto}  close={close}/> */}
           <SearchInputPlus goto={goto}  close={close} />
         </Container>
       </Drawer>
       {!opened ? (
-        <div style={{ position: 'absolute', bottom: '20px', right: '0', left: '0', width: "100%", borderRadius: "7px", padding: "3px 4px", display: 'flex', alignItems: "center", justifyContent: "center"}}>
+        <div style={{ position: 'absolute', bottom: '20px', right: '0', left: '0', width: "100%", borderRadius: "7px", padding: "3px 4px", display: 'flex', alignItems: "center", justifyContent: "center", transition: 'opacity .5s', transitionDelay: '2s', opacity: (openEye) ? '1' : '0' }}>
           <UnstyledButton onClick={open} >
             <div style={{display: 'flex', alignItems: 'center'}}>
               <Text ff={`monospace`} size='xs'>&nbsp;Recherchez avec&nbsp;</Text>

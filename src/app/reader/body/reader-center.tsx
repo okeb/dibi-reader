@@ -1,6 +1,6 @@
 'use client'
 
-import { useCounter, useDebouncedCallback, useDebouncedState, useDocumentTitle, useDocumentVisibility, useHotkeys, useListState, useNetwork, useStateHistory } from '@mantine/hooks';
+import { useCounter, useDebouncedCallback, useDebouncedState, useDocumentTitle, useDocumentVisibility, useHotkeys, useListState, useNetwork, useOs, useStateHistory } from '@mantine/hooks';
 import classes from './ReaderCenter.module.scss'
 import TypoSize from '../../../../components/actions/typoSize';
 import { useEffect, useState } from 'react';
@@ -65,7 +65,7 @@ function ReaderCenter({
   const [debounced, setDebounced] = useDebouncedState('', 300);
   const { colorScheme, setColorScheme } = useMantineColorScheme();
   useDocumentTitle(verse ? `Bible Reader: ${verse[0]}` : "The Bible Reader");
-
+  const os = useOs();
   // const idle = useIdle(14000, { initialState: false });
   // const interval = useInterval(() => setSeconds((s) => s + 1), 1000);
   // useEffect(() => {
@@ -465,6 +465,17 @@ function ReaderCenter({
         <ScrollArea h={300} offsetScrollbars scrollbarSize={12} type="scroll" mx="auto" w={`100%`}  id='verset-output-area'
         // className={ classes.verset_output_area }
         >
+          {viewer.length === 0 ? (
+            <>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'absolute', bottom: '50%', left: '0', right: '0' }}>
+                <Text  ff={'monospace'} size='20px' mb={'-35px'}>Faites une recherche en appuyant sur <span className={classes.buttonKbd}>{(os == 'macos') ? (
+              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" ><path fill="currentColor" d="M6.5 5A1.5 1.5 0 0 1 8 6.5V8H6.5a1.5 1.5 0 1 1 0-3M10 8V6.5A3.5 3.5 0 1 0 6.5 10H8v4H6.5a3.5 3.5 0 1 0 3.5 3.5V16h4v1.5a3.5 3.5 0 1 0 3.5-3.5H16v-4h1.5A3.5 3.5 0 1 0 14 6.5V8zm0 2h4v4h-4zm6-2V6.5A1.5 1.5 0 1 1 17.5 8zm0 8h1.5a1.5 1.5 0 1 1-1.5 1.5zm-8 0v1.5A1.5 1.5 0 1 1 6.5 16z"></path></svg>
+            ): (
+              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m17.8 20l-12-1.5c-1-.1-1.8-.9-1.8-1.9V7.4c0-1 .8-1.8 1.8-1.9l12-1.5c1.2-.1 2.2.8 2.2 1.9V18c0 1.2-1.1 2.1-2.2 1.9zM12 5v14m-8-7h16"></path></svg>
+            )}</span> + <span className={classes.buttonKbd}>K</span></Text>
+              </div>
+            </>
+          ):(<></>)}
           {viewer.map((current, index) => { 
             return(
               <VersetOutput 
@@ -542,7 +553,7 @@ function ReaderCenter({
             </HoverCard>
           </div>
         </div>
-        <SearchDrawer goto={goto} />
+        <SearchDrawer goto={goto} openEye={openEye}/>
     </section>
     
   )
