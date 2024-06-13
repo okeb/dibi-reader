@@ -4,7 +4,7 @@ import classes from './footer.module.scss';
 import AnchorHistory from './anchorHistory';
 
 interface history {
-  history: (string | number)[],
+  history: (string)[],
   current: number
 }
 export default function  HistoryList({
@@ -25,7 +25,7 @@ export default function  HistoryList({
           >
             {sharedHistory.history.map((item, index) => (
               <>
-                <AnchorHistory index={index} item={item} sharedHistoryCurrent={sharedHistory.current}/>
+                <AnchorHistory index={ index } item={ item } sharedHistoryCurrent={sharedHistory.current} />
               </>
             ))}
           </Stack>

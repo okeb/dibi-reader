@@ -9,7 +9,7 @@ export default function AnchorHistory({
   sharedHistoryCurrent,
 }:{
   index?: number,
-  item?:(string)[]  
+  item?:(string)[] | string
   sharedHistoryCurrent: number,
 
 }) {
@@ -24,7 +24,7 @@ export default function AnchorHistory({
           </span>
           ):(
             <></>
-          )}<TextGenerateEffect words={item[0]} delay={0.4} duration={3} className={classes.historyItem }/></p>
+          )}<TextGenerateEffect words={item[0]} delay={0.4} duration={3} className={ classes.historyItem }/></p>
       ): (
         <></>
       )}
