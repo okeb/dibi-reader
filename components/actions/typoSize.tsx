@@ -19,10 +19,10 @@ export default function TypoSize(
 ) {
   const [opened, setOpened] = useState(false);
   useHotkeys([
-    ['shift+ArrowUp', () => handlers.increment()],
-    ['G', () => handlers.increment()],
-    ['shift+ArrowDown', () => handlers.decrement()],
-    ['L', () => handlers.decrement()],
+    ['shift+ArrowUp', () => handlers.increment],
+    ['G', () => handlers.increment],
+    ['shift+ArrowDown', () => handlers.decrement],
+    ['L', () => handlers.decrement],
   ]);
   const { colorScheme, setColorScheme } = useMantineColorScheme();
   return (
